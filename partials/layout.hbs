@@ -1,0 +1,56 @@
+<table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+    <tr>
+        <td>&nbsp;</td>
+        <td class="container">
+            <div class="content">
+                {{#if header}}
+                <table role="presentation" class="main main-header">
+                    <tr>
+                        <td>
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    {{{header}}}
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                {{/if}}
+
+                <!-- START CENTERED WHITE CONTAINER -->
+                {{#if header}}
+                <table role="presentation" class="main has-header">
+                    {{else}}
+                    <table role="presentation" class="main">
+                        {{/if}}
+
+                        <!-- START MAIN CONTENT AREA -->
+                        <tr>
+                            <td class="wrapper">
+                                <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            {{> @partial-block}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+
+                    <div class="footer">
+                        <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td class="content-block">
+                                    <span>YourCompany</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+            </div>
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+</table>

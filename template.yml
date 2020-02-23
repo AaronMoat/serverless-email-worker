@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: serverless-email-worker
+
+Parameters:
+  SenderName:
+    Type: String
+
+  SenderEmail:
+    Type: String
+
+Resources:
+  EmailWorker:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: handler.handler
+      Runtime: nodejs12.x
+      Timeout: 180
+      Environment:
+        Variables:
+          SENDER_NAME: !Ref SenderName
+          SENDER_EMAIL: !Ref SenderEmail
+      Events:
+        EmailQueueSQSEvent:
+          Type: SQS
+          Properties:
+            Queue: !GetAtt EmailQueue.Arn
+            BatchSize: 10
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - ses:sendEmail
+              Resource: "*"
+
+  EmailQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      RedrivePolicy:
+        deadLetterTargetArn: !GetAtt EmailDLQ.Arn
+        maxReceiveCount: 3
+      VisibilityTimeout: 240
+
+  EmailDLQ:
+    Type: AWS::SQS::Queue

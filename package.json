@@ -1,0 +1,29 @@
+{
+  "name": "serverless-email-worker",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "generate-sample-emails": "node generateSampleEmails.js"
+  },
+  "dependencies": {
+    "handlebars": "^4.5.3",
+    "husky": "^4.2.3",
+    "juice": "^6.0.0",
+    "lint-staged": "^10.0.7",
+    "prettier": "^1.19.1"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.578.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{json,css,md,js}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
