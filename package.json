@@ -13,7 +13,7 @@
     "prettier": "^1.19.1"
   },
   "devDependencies": {
-    "aws-sdk": "^2.578.0"
+    "aws-sdk": "^2.814.0"
   },
   "husky": {
     "hooks": {
